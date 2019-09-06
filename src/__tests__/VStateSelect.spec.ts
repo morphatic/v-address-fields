@@ -60,8 +60,6 @@ describe('VStateSelect', () => {
       })
   
       it('should render component and match snapshot', () => {
-        // @ts-ignore
-        global.Stripe = Stripe
         const wrapper = mountFunction({
           propsData: { foo },
         })
@@ -71,8 +69,6 @@ describe('VStateSelect', () => {
       })
         
       it('should have an property called `foo`', () => {
-        // @ts-ignore
-        global.Stripe = Stripe
         const wrapper = mountFunction({ propsData: { foo }, })
         expect(wrapper.attributes()).toBeDefined()
       })
@@ -84,8 +80,6 @@ describe('VStateSelect', () => {
         // capture console.warn
         const capture = m => { messages.push(m.toString()) }
         global.console.warn = jest.fn(capture)
-        // @ts-ignore
-        global.Stripe = Stripe
         wrapper = mountFunction({
           propsData: { foo }
         })
