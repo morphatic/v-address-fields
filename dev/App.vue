@@ -19,7 +19,7 @@
       <v-container fluid>
         <v-row>
           <v-col cols="12">
-            YOUR CUSTOM COMPONENT SHOULD GO HERE <v-icon color="success">{{ icons.check }}</v-icon>
+            <v-state-select v-model="state" />
           </v-col>
         </v-row>
       </v-container>
@@ -34,6 +34,7 @@
       icons: {
         check: mdiCheck,
       },
+      state: null,
     }),
   }
 </script>
