@@ -2,10 +2,9 @@
 /// <reference path="../node_modules/vuetify/src/globals.d.ts" />
 import Vue from 'vue'
 // import { VuetifyThemeVariant } from 'vuetify/types/services/theme'
-// import { ElementStyles } from '../types'
 
 // 3rd Party Libs
-// import merge from 'deepmerge' // EXAMPLE; You can remove this if you have no 3rd party libs
+import { UsaStates } from 'usa-states'
 
 // Styles
 import './VStateSelect.sass'
@@ -25,8 +24,12 @@ interface options extends InstanceType<typeof base> {
    * about here.
    */
   foo: string
+  /**
+   * !Props inherited from VAutocomplete
+   */
+  items: Object[]
 }
-// Extend VTextField to define the VStripeCard component
+// Extend VAutocomplete to define the VStateSelect component
 export default base.extend<options>().extend({
   name: 'v-state-select',
   props: {
@@ -36,10 +39,16 @@ export default base.extend<options>().extend({
     },
   },
   data: () => ({
+    usaStates: new UsaStates(),
   }),
   computed: {},
   watch: {},
-  mounted () {},
+  mounted () {
+    this.items = this.usaStates.format({
+      $text: 'name',
+      $value: 'abbr',
+    })
+  },
   methods: {
     bar () {
       return 'baz'

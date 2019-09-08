@@ -121,5 +121,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "usa-states": "^0.0.5"
   }
 }
