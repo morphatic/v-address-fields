@@ -24,10 +24,6 @@ interface options extends InstanceType<typeof base> {
    * about here.
    */
   foo: string
-  /**
-   * !Props inherited from VAutocomplete
-   */
-  items: Object[]
 }
 // Extend VAutocomplete to define the VStateSelect component
 export default base.extend<options>().extend({
@@ -41,14 +37,16 @@ export default base.extend<options>().extend({
   data: () => ({
     usaStates: new UsaStates(),
   }),
-  computed: {},
-  watch: {},
-  mounted () {
-    this.items = this.usaStates.format({
-      $text: 'name',
-      $value: 'abbr',
-    })
+  computed: {
+    allItems (): object[] {
+      return this.usaStates.format({
+        $text: 'name',
+        $value: 'abbr',
+      })
+    },
   },
+  watch: {},
+  mounted () {},
   methods: {
     bar () {
       return 'baz'
