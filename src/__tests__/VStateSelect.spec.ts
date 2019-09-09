@@ -11,9 +11,9 @@ const vuetifyMocks = {
         error: '#ff0000',
       },
       dark: false,
-      lang: {
-        t: (val: string) => val,
-      },
+    },
+    lang: {
+      t: (val: string) => val,
     },
   },
 }
@@ -27,9 +27,9 @@ const messages = []
 
 describe('VStateSelect', () => {
   describe('installer', () => {
-    it('should register the your-component component', () => {
+    it('should register the v-state-select component', () => {
       Vue.use(VAddressFields)
-      expect(Vue.options.components['your-component']).toBeTruthy()
+      expect(Vue.options.components['v-state-select']).toBeTruthy()
     })
   })
 
@@ -58,37 +58,49 @@ describe('VStateSelect', () => {
         global.console.warn = jest.fn(capture)
         global.console.log = jest.fn(capture)
       })
-  
+
       it('should render component and match snapshot', () => {
-        const wrapper = mountFunction({
-          propsData: { foo },
-        })
+        const wrapper = mountFunction()
         // replace the auto-generated `id` with one that matches
         const html = wrapper.html().replace(/div id="input-\d+"/, 'div id="input-1"')
         expect(html).toMatchSnapshot()
       })
-        
-      it('should have an property called `foo`', () => {
-        const wrapper = mountFunction({ propsData: { foo }, })
-        expect(wrapper.attributes()).toBeDefined()
+
+      it('should have a property called `contiguousOnly` that defaults to `false`', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.contiguousOnly).toBeDefined()
+        expect(wrapper.vm.contiguousOnly).toBe(false)
       })
-    })
-  
-    describe('internal functions and events', () => {
-      let wrapper
-      beforeEach(() => {
-        // capture console.warn
-        const capture = m => { messages.push(m.toString()) }
-        global.console.warn = jest.fn(capture)
-        wrapper = mountFunction({
-          propsData: { foo }
-        })
+
+      it('should have a property called `exclude` that defaults to an empty array', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.exclude).toBeDefined()
+        expect(wrapper.vm.exclude).toStrictEqual([])
       })
-  
-      it('bar() should return "baz"', () => {
-        const result = wrapper.vm.bar()
-        expect(result).toBe('baz')
-      })  
+
+      it('should have a property called `includeTerritories` that defaults to `false`', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.includeTerritories).toBeDefined()
+        expect(wrapper.vm.includeTerritories).toBe(false)
+      })
+
+      it('should have a property called `storedValue` that defaults to `abbr`', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.storedValue).toBeDefined()
+        expect(wrapper.vm.storedValue).toBe('abbr')
+      })
+
+      it('should have a property called `text` that defaults to `name`', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.text).toBeDefined()
+        expect(wrapper.vm.text).toBe('name')
+      })
+
+      it('should generate a list of 51 "state" items', () => {
+        const wrapper = mountFunction()
+        expect(wrapper.vm.allItems).toBeDefined()
+        expect(wrapper.vm.allItems.length).toBe(51)
+      })
     })
   })
 })
