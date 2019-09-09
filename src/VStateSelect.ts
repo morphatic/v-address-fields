@@ -1,7 +1,6 @@
 // Imported Types
 /// <reference path="../node_modules/vuetify/src/globals.d.ts" />
 import Vue from 'vue'
-// import { VuetifyThemeVariant } from 'vuetify/types/services/theme'
 
 // 3rd Party Libs
 import { UsaStates } from 'usa-states'
@@ -20,36 +19,54 @@ const base = Vue.extend({ mixins: [VAutocomplete] })
 interface options extends InstanceType<typeof base> {
   /**
    * !Props unique to VStateSelect
-   * Add properties of your project that TypeScript should know
-   * about here.
    */
-  foo: string
+  contiguousOnly: boolean
+  exclude: string[]
+  includeTerritories: boolean
 }
 // Extend VAutocomplete to define the VStateSelect component
 export default base.extend<options>().extend({
   name: 'v-state-select',
   props: {
-    foo: {
+    contiguousOnly: {
+      type: Boolean,
+      default: false,
+    },
+    exclude: {
+      type: Array,
+      default: () => [],
+    },
+    includeTerritories: {
+      type: Boolean,
+      default: false,
+    },
+    storedValue: {
       type: String,
-      default: 'bar',
+      default: 'abbr',
+    },
+    text: {
+      type: String,
+      default: 'name',
     },
   },
-  data: () => ({
-    usaStates: new UsaStates(),
-  }),
   computed: {
     allItems (): object[] {
-      return this.usaStates.format({
-        $text: 'name',
-        $value: 'abbr',
+      const { contiguousOnly, exclude, includeTerritories, storedValue, text } = this
+      const usaStates = new UsaStates({
+        contiguousOnly,
+        exclude,
+        includeTerritories,
+      })
+      return usaStates.format({
+        $text: text,
+        $value: storedValue,
       })
     },
-  },
-  watch: {},
-  mounted () {},
-  methods: {
-    bar () {
-      return 'baz'
+    classes (): object {
+      return {
+        ...VAutocomplete.options.computed.classes.call(this),
+        'v-state-select': true,
+      }
     },
   },
 })
