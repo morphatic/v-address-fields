@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var VAddressFields = {
   install: function install(Vue, options) {
-    Vue.component('your-component', _VStateSelect["default"]);
+    Vue.component('v-state-select', _VStateSelect["default"]);
   }
 };
 var _default = VAddressFields;
