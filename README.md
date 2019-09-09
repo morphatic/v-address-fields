@@ -82,7 +82,7 @@ Or if you just want to use the `v-state-select` component within another compone
 |:--------------------:|:----------:|:-------:|:---------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |   `contiguousOnly`   |  `boolean` | `false` |     no    | Only include the "lower 48" contiguous US States                                                                                                                  |
 |       `exclude`      | `string[]` |   `[]`  |     no    | List of states or territories to exclude. Can be an array of state abbreviations, e.g. `['AK', 'HI']`, state names, e.g. `['Alaska', 'Hawaii']`, or a mix of both |
-| `includeTerritories` | `boolean ` | `false` |     no    | Include US protectorates and territories, e.g. Puerto Rico, Guam, etc.                                                                                            |
+| `includeTerritories` | `boolean`  | `false` |     no    | Include US protectorates and territories, e.g. Puerto Rico, Guam, etc.                                                                                            |
 |     `storedValue`    |  `string`  |  `abbr` |     no    | The value to be stored in the output variable for this input. Available options: abbr, name, capital                                                              |
 |        `text`        |  `string`  |  `name` |     no    | The text value that will be shown in the dropdown. Available values: abbr, name, capital                                                                          |
 
